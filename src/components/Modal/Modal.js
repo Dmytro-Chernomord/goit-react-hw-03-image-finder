@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { createPortal } from 'react-dom';
-
-import defImage from '../default.jpg';
+import defImg from '../default.jpg';
 
 const modalRoot = document.querySelector('#modal-root');
 
 export class Modal extends Component {
+  static defaultProps = {
+    img: defImg,
+  };
   escapeClose = e => {
     if (e.code === 'Escape') {
       this.props.toogleModal();
@@ -26,27 +28,12 @@ export class Modal extends Component {
     return createPortal(
       <div onClick={this.closeModal} className="Overlay">
         <div className="Modal">
-          <img src={defImage} alt="" />
+          <img src={this.props.img} alt="" />
         </div>
       </div>,
       modalRoot,
     );
   }
 }
-
-// const Modal = ({ toogleModal }) => {
-//   const closeModal = event => {
-//     if (event.currentTarget === event.target) {
-//       toogleModal();
-//     }
-//   };
-//   return (
-//     <div onClick={closeModal} className="Overlay">
-//       <div className="Modal">
-//         <img src={defImage} alt="" />
-//       </div>
-//     </div>
-//   );
-// };
 
 export default Modal;
