@@ -82,7 +82,7 @@ export class App extends Component {
           />
         )}
         <Searchbar onSubmit={this.handleQuery} />
-
+        {this.state.error && <p>somthenig wrong. Try again</p>}
         {this.state.img.length > 0 ? (
           <ImageGallery>
             <ImageGalleryItem
