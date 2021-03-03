@@ -22,7 +22,10 @@ export class App extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.query !== this.state.query) {
+    if (
+      prevState.query !== this.state.query
+      // || prevState.currentPage !== this.state.currentPage
+    ) {
       this.fetchPictures();
     }
   }
@@ -33,7 +36,16 @@ export class App extends Component {
     });
   };
   handleQuery = e => {
-    this.setState({ query: e, currentPage: 1, img: [], error: null });
+    if (e !== this.state.query) {
+      this.setState({ query: e, currentPage: 1, img: [], error: null });
+    } else {
+      console.log('hi');
+      this.setState(prevState => ({
+        query: this.state.query,
+        currentPage: prevState.currentPage + 1,
+        error: null,
+      }));
+    }
   };
 
   catchGrossImg = url => {
